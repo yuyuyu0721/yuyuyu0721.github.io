@@ -1,2 +1,56 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top</link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4</url><title>avatar</title><link>https://blog.yuyuyu0721.top</link></image><lastBuildDate>Sat, 15 Nov 2025 11:54:36 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>TEST</title><link>https://blog.yuyuyu0721.top/post/TEST.html</link><description># TEST。</description><guid isPermaLink="true">https://blog.yuyuyu0721.top/post/TEST.html</guid><pubDate>Sat, 15 Nov 2025 11:40:02 +0000</pubDate></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top</link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4</url><title>avatar</title><link>https://blog.yuyuyu0721.top</link></image><lastBuildDate>Sat, 15 Nov 2025 12:01:40 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>实例模板</title><link>https://blog.yuyuyu0721.top/post/shi-li-mo-ban.html</link><description># 玉与遇第一次写文章
+## 二级标题
+###  三级标题
+依次类推
+*斜体* **加粗**
+[url跳转链接](bilibili.com)
+
+&gt;[!NOTE]
+NOTE提示
+&gt;
+
+&gt;[!TIP]
+TIP提示
+&gt;
+
+&gt;[!CAUTION]
+CATION提示
+&gt;
+
+&gt;[!WARNING]
+WARNING提示
+&gt;
+`小代码块`
+```python
+print('hello world')#大代码块
+```
+```markdown
+# 玉与遇第一次写文章
+## 二级标题
+###  三级标题
+依次类推
+*斜体* **加粗**
+[url跳转链接](bilibili.com)
+
+&gt;[!NOTE]
+NOTE提示
+&gt;
+
+&gt;[!TIP]
+TIP提示
+&gt;
+
+&gt;[!CAUTION]
+CATION提示
+&gt;
+
+&gt;[!WARNING]
+WARNING提示
+&gt;
+`小代码块`
+```python
+print('hello world')#大代码块
+```
+```
+。</description><guid isPermaLink="true">https://blog.yuyuyu0721.top/post/shi-li-mo-ban.html</guid><pubDate>Sat, 15 Nov 2025 12:01:08 +0000</pubDate></item><item><title>TEST</title><link>https://blog.yuyuyu0721.top/post/TEST.html</link><description># TEST。</description><guid isPermaLink="true">https://blog.yuyuyu0721.top/post/TEST.html</guid><pubDate>Sat, 15 Nov 2025 11:40:02 +0000</pubDate></item></channel></rss>
