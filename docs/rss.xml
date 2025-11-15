@@ -1,5 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top </link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4 </url><title>avatar</title><link>https://blog.yuyuyu0721.top </link></image><lastBuildDate>Sat, 15 Nov 2025 16:41:04 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>post/shi-li-mo-ban</title><link>https://blog.yuyuyu0721.top /post/post-shi-li-mo-ban.html</link><description># 实例模板
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top </link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4 </url><title>avatar</title><link>https://blog.yuyuyu0721.top </link></image><lastBuildDate>Sat, 15 Nov 2025 18:13:39 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>B2028</title><link>https://blog.yuyuyu0721.top /post/B2028.html</link><description># 反向输出一个三位数
+## 题目简单重在了解字符串反转
+```python
+n = input().strip()
+print(n[::-1])
+```
+&gt;[!NOTE]
+其中n[::-1]即为字符串反转重点
+运用了切片一特性
+&gt;
+
+&gt;[!TIP]
+切片是从序列（如字符串、列表、元组等）中提取部分元素
+格式为：对象[start:end:step] start为开始索引（默认为0） end为结束索引 step为步长（默认为1）
+&gt;
+# 总结
+主要是学习字符串反转和切片的定义和格式
+
+。</description><guid isPermaLink="true">https://blog.yuyuyu0721.top /post/B2028.html</guid><pubDate>Sat, 15 Nov 2025 18:13:11 +0000</pubDate></item><item><title>post/shi-li-mo-ban</title><link>https://blog.yuyuyu0721.top /post/post-shi-li-mo-ban.html</link><description># 实例模板
 
 # 玉与遇第一次写文章
 ## 二级标题
