@@ -12,36 +12,38 @@
     </script>
 <meta name="description" content="# P1150 Peter 的烟
 ## 题目描述
-Peter有n根烟，k（k>1)个烟蒂可以换一个新烟
-`输入格式 一行包括两个整数n,k(1<n,k<10**8)`
-`输出格式一个整数包括最终烟的根数`
+Peter有n根烟，`k（k>1)`个烟蒂可以换一个新烟
+输入格式 一行包括两个整数`n,k(1<n,k<10**8)`
+输出格式一个整数包括最终烟的根数
 ```python
 n, k = map(int, input().split())
 total = n  # 初始的烟
 butts = n  # 初始的烟蒂
-
-# 当烟蒂数量足够兑换新烟时
+#当烟蒂数量足够兑换新烟时
 while butts >= k:
     # 计算能换多少根新烟
     new_cigarettes = butts // k
     total += new_cigarettes  # 加上新换的烟
-
-    # 更新烟蒂数量：兑换后剩余的烟蒂 + 新烟吸完产生的烟蒂
+    # 更新烟蒂数量:兑换后剩余的烟蒂 + 新烟吸完产生的烟蒂
     butts = (butts % k) + new_cigarettes
-
 print(total)
 ```
->[!NOTE]
+> [!NOTE]
 本题重在理解新烟和新烟蒂的变化(要能想到将n初始的输出值改为两个变量)即以下所展示的代码
-前者用自然语言来讲就是新的烟等于初始的烟蒂整除烟蒂可换取一个新烟的数量
-后者则是新烟蒂数量等于烟蒂取余初始的烟蒂(兑换后剩余的烟蒂)整除烟蒂可换取一个新烟的数量加新烟吸完产生的烟蒂
-`new_cigarettes = butts // k和 butts = (butts % k) + new_cigarettes` 
-### 举个例子
-设初始的烟和烟蒂为4，k值输入为4(则四个烟蒂换一个新烟)
-符合while循环中的 'butts >= k'则 new_cigarettes=4//4=1
-总和记录=1(新烟）+4（初始的烟）
-最后更新烟蒂数量=兑换后剩余的烟蒂(这里即为0)+新烟吸完后产生的新烟蒂(这里即为1)
+`new_cigarettes = butts // k`和 `butts = (butts % k) + new_cigarettes` 
 >
+
+### 举个例子
+## 初始条件
+*`k=4`:兑换比例为四个烟蒂换一个新烟
+*`total=4`:初始的烟为4
+*`butts=4`:抽完初始的烟后产生的烟蒂为4
+## while循环条件判断
+*`butts>=k`:判断烟蒂数量是否大于或者等于烟与烟蒂的兑换比例(即是否能换新烟）
+## while循环条件符合执行其中语句块
+*兑换的新烟:` new_cigarettes = butts // k =4//4=1`
+*兑换完后烟的总数:`total += new_cigarettes=1(新烟）+4（初始的烟）=5`
+*更新烟蒂数量:` butts = (butts % k) + new_cigarettes`兑换后剩余的烟蒂+新烟吸完后产生的新烟蒂=0+1=1
 ### 总结
 本题在做的时候重在能想到将一个输出名改为两个变量名 如果是单纯理解代码则重在理解新烟和新烟蒂的变化
 主要使用while循环和运算符运用
@@ -49,36 +51,38 @@ print(total)
 <meta property="og:title" content="p1150">
 <meta property="og:description" content="# P1150 Peter 的烟
 ## 题目描述
-Peter有n根烟，k（k>1)个烟蒂可以换一个新烟
-`输入格式 一行包括两个整数n,k(1<n,k<10**8)`
-`输出格式一个整数包括最终烟的根数`
+Peter有n根烟，`k（k>1)`个烟蒂可以换一个新烟
+输入格式 一行包括两个整数`n,k(1<n,k<10**8)`
+输出格式一个整数包括最终烟的根数
 ```python
 n, k = map(int, input().split())
 total = n  # 初始的烟
 butts = n  # 初始的烟蒂
-
-# 当烟蒂数量足够兑换新烟时
+#当烟蒂数量足够兑换新烟时
 while butts >= k:
     # 计算能换多少根新烟
     new_cigarettes = butts // k
     total += new_cigarettes  # 加上新换的烟
-
-    # 更新烟蒂数量：兑换后剩余的烟蒂 + 新烟吸完产生的烟蒂
+    # 更新烟蒂数量:兑换后剩余的烟蒂 + 新烟吸完产生的烟蒂
     butts = (butts % k) + new_cigarettes
-
 print(total)
 ```
->[!NOTE]
+> [!NOTE]
 本题重在理解新烟和新烟蒂的变化(要能想到将n初始的输出值改为两个变量)即以下所展示的代码
-前者用自然语言来讲就是新的烟等于初始的烟蒂整除烟蒂可换取一个新烟的数量
-后者则是新烟蒂数量等于烟蒂取余初始的烟蒂(兑换后剩余的烟蒂)整除烟蒂可换取一个新烟的数量加新烟吸完产生的烟蒂
-`new_cigarettes = butts // k和 butts = (butts % k) + new_cigarettes` 
-### 举个例子
-设初始的烟和烟蒂为4，k值输入为4(则四个烟蒂换一个新烟)
-符合while循环中的 'butts >= k'则 new_cigarettes=4//4=1
-总和记录=1(新烟）+4（初始的烟）
-最后更新烟蒂数量=兑换后剩余的烟蒂(这里即为0)+新烟吸完后产生的新烟蒂(这里即为1)
+`new_cigarettes = butts // k`和 `butts = (butts % k) + new_cigarettes` 
 >
+
+### 举个例子
+## 初始条件
+*`k=4`:兑换比例为四个烟蒂换一个新烟
+*`total=4`:初始的烟为4
+*`butts=4`:抽完初始的烟后产生的烟蒂为4
+## while循环条件判断
+*`butts>=k`:判断烟蒂数量是否大于或者等于烟与烟蒂的兑换比例(即是否能换新烟）
+## while循环条件符合执行其中语句块
+*兑换的新烟:` new_cigarettes = butts // k =4//4=1`
+*兑换完后烟的总数:`total += new_cigarettes=1(新烟）+4（初始的烟）=5`
+*更新烟蒂数量:` butts = (butts % k) + new_cigarettes`兑换后剩余的烟蒂+新烟吸完后产生的新烟蒂=0+1=1
 ### 总结
 本题在做的时候重在能想到将一个输出名改为两个变量名 如果是单纯理解代码则重在理解新烟和新烟蒂的变化
 主要使用while循环和运算符运用
@@ -155,35 +159,34 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <div id="content">
 <div class="markdown-body" id="postBody"><h1>P1150 Peter 的烟</h1>
 <h2>题目描述</h2>
-<p>Peter有n根烟，k（k&gt;1)个烟蒂可以换一个新烟<br>
-<code class="notranslate">输入格式 一行包括两个整数n,k(1&lt;n,k&lt;10**8)</code><br>
-<code class="notranslate">输出格式一个整数包括最终烟的根数</code></p>
+<p>Peter有n根烟，<code class="notranslate">k（k&gt;1)</code>个烟蒂可以换一个新烟<br>
+输入格式 一行包括两个整数<code class="notranslate">n,k(1&lt;n,k&lt;10**8)</code><br>
+输出格式一个整数包括最终烟的根数</p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">n</span>, <span class="pl-s1">k</span> <span class="pl-c1">=</span> <span class="pl-en">map</span>(<span class="pl-s1">int</span>, <span class="pl-en">input</span>().<span class="pl-c1">split</span>())
 <span class="pl-s1">total</span> <span class="pl-c1">=</span> <span class="pl-s1">n</span>  <span class="pl-c"># 初始的烟</span>
 <span class="pl-s1">butts</span> <span class="pl-c1">=</span> <span class="pl-s1">n</span>  <span class="pl-c"># 初始的烟蒂</span>
-
-<span class="pl-c"># 当烟蒂数量足够兑换新烟时</span>
+<span class="pl-c">#当烟蒂数量足够兑换新烟时</span>
 <span class="pl-k">while</span> <span class="pl-s1">butts</span> <span class="pl-c1">&gt;=</span> <span class="pl-s1">k</span>:
     <span class="pl-c"># 计算能换多少根新烟</span>
     <span class="pl-s1">new_cigarettes</span> <span class="pl-c1">=</span> <span class="pl-s1">butts</span> <span class="pl-c1">//</span> <span class="pl-s1">k</span>
     <span class="pl-s1">total</span> <span class="pl-c1">+=</span> <span class="pl-s1">new_cigarettes</span>  <span class="pl-c"># 加上新换的烟</span>
-
-    <span class="pl-c"># 更新烟蒂数量：兑换后剩余的烟蒂 + 新烟吸完产生的烟蒂</span>
+    <span class="pl-c"># 更新烟蒂数量:兑换后剩余的烟蒂 + 新烟吸完产生的烟蒂</span>
     <span class="pl-s1">butts</span> <span class="pl-c1">=</span> (<span class="pl-s1">butts</span> <span class="pl-c1">%</span> <span class="pl-s1">k</span>) <span class="pl-c1">+</span> <span class="pl-s1">new_cigarettes</span>
-
 <span class="pl-en">print</span>(<span class="pl-s1">total</span>)</pre></div>
 <div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>本题重在理解新烟和新烟蒂的变化(要能想到将n初始的输出值改为两个变量)即以下所展示的代码<br>
-前者用自然语言来讲就是新的烟等于初始的烟蒂整除烟蒂可换取一个新烟的数量<br>
-后者则是新烟蒂数量等于烟蒂取余初始的烟蒂(兑换后剩余的烟蒂)整除烟蒂可换取一个新烟的数量加新烟吸完产生的烟蒂<br>
-<code class="notranslate">new_cigarettes = butts // k和 butts = (butts % k) + new_cigarettes</code></p>
+<code class="notranslate">new_cigarettes = butts // k</code>和 <code class="notranslate">butts = (butts % k) + new_cigarettes</code></p>
 </div>
 <h3>举个例子</h3>
-<p>设初始的烟和烟蒂为4，k值输入为4(则四个烟蒂换一个新烟)<br>
-符合while循环中的 'butts &gt;= k'则 new_cigarettes=4//4=1<br>
-总和记录=1(新烟）+4（初始的烟）<br>
-最后更新烟蒂数量=兑换后剩余的烟蒂(这里即为0)+新烟吸完后产生的新烟蒂(这里即为1)</p>
-<blockquote>
-</blockquote>
+<h2>初始条件</h2>
+<p>*<code class="notranslate">k=4</code>:兑换比例为四个烟蒂换一个新烟<br>
+*<code class="notranslate">total=4</code>:初始的烟为4<br>
+*<code class="notranslate">butts=4</code>:抽完初始的烟后产生的烟蒂为4</p>
+<h2>while循环条件判断</h2>
+<p>*<code class="notranslate">butts&gt;=k</code>:判断烟蒂数量是否大于或者等于烟与烟蒂的兑换比例(即是否能换新烟）</p>
+<h2>while循环条件符合执行其中语句块</h2>
+<p>*兑换的新烟:<code class="notranslate"> new_cigarettes = butts // k =4//4=1</code><br>
+*兑换完后烟的总数:<code class="notranslate">total += new_cigarettes=1(新烟）+4（初始的烟）=5</code><br>
+*更新烟蒂数量:<code class="notranslate"> butts = (butts % k) + new_cigarettes</code>兑换后剩余的烟蒂+新烟吸完后产生的新烟蒂=0+1=1</p>
 <h3>总结</h3>
 <p>本题在做的时候重在能想到将一个输出名改为两个变量名 如果是单纯理解代码则重在理解新烟和新烟蒂的变化<br>
 主要使用while循环和运算符运用</p></div>
