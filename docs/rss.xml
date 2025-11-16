@@ -1,42 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top </link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4 </url><title>avatar</title><link>https://blog.yuyuyu0721.top </link></image><lastBuildDate>Sun, 16 Nov 2025 07:23:53 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>p1150</title><link>https://blog.yuyuyu0721.top /post/p1150.html</link><description># P1150 Peter 的烟
-## 题目描述
-Peter有n根烟，`k（k&gt;1)`个烟蒂可以换一个新烟
-输入格式 一行包括两个整数`n,k(1&lt;n,k&lt;10**8)`
-输出格式一个整数包括最终烟的根数
-```python
-n, k = map(int, input().split())
-total = n  # 初始的烟
-butts = n  # 初始的烟蒂
-#当烟蒂数量足够兑换新烟时
-while butts &gt;= k:
-    # 计算能换多少根新烟
-    new_cigarettes = butts // k
-    total += new_cigarettes  # 加上新换的烟
-    # 更新烟蒂数量:兑换后剩余的烟蒂 + 新烟吸完产生的烟蒂
-    butts = (butts % k) + new_cigarettes
-print(total)
-```
-&gt; [!NOTE]
-本题重在理解新烟和新烟蒂的变化(要能想到将n初始的输出值改为两个变量)即以下所展示的代码
-`new_cigarettes = butts // k`和 `butts = (butts % k) + new_cigarettes` 
-&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top </link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4 </url><title>avatar</title><link>https://blog.yuyuyu0721.top </link></image><lastBuildDate>Sun, 16 Nov 2025 07:32:00 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>p1150</title><link>https://blog.yuyuyu0721.top /post/p1150.html</link><description># P1150 Peter 的烟
+## 原题描述# P1150 Peter 的烟
 
-# 举个例子
-## 初始条件
-*  `k=4`:兑换比例为四个烟蒂换一个新烟
-*  `total=4`:初始的烟为4
-*  `butts=4`:抽完初始的烟后产生的烟蒂为4
-## while循环条件判断
-*  `butts&gt;=k`:判断烟蒂数量是否大于或者等于烟与烟蒂的兑换比例(即是否能换新烟）
-## while循环条件符合执行其中语句块
-*  兑换的新烟:` new_cigarettes = butts // k =4//4=1`
-*  兑换完后烟的总数:`total += new_cigarettes=1(新烟）+4（初始的烟）=5`
-*  更新烟蒂数量:` butts = (butts % k) + new_cigarettes`兑换后剩余的烟蒂+新烟吸完后产生的新烟蒂=0+1=1
-### 总结
-本题在做的时候重在能想到将一个输出名改为两个变量名 如果是单纯理解代码则重在理解新烟和新烟蒂的变化
-主要使用while循环和运算符运用
-。</description><guid isPermaLink="true">https://blog.yuyuyu0721.top /post/p1150.html</guid><pubDate>Sat, 15 Nov 2025 18:53:36 +0000</pubDate></item><item><title>B2028</title><link>https://blog.yuyuyu0721.top /post/B2028.html</link><description># 反向输出一个三位数
+## 题目背景
+
+**温馨提醒：吸烟有害健康，请勿尝试吸烟！**
+
+## 题目描述
+
+Peter 有 n 根烟，他每吸完一根烟就把烟蒂保存起来，k（k&gt;1）个烟蒂可以换一个新的烟，那么 Peter 最终能吸到多少根烟呢？
+
+与某些脑筋急转弯不同的是，Peter 并不能从异次元借到烟蒂，抽完后再还回去。</description><guid isPermaLink="true">https://blog.yuyuyu0721.top /post/p1150.html</guid><pubDate>Sat, 15 Nov 2025 18:53:36 +0000</pubDate></item><item><title>B2028</title><link>https://blog.yuyuyu0721.top /post/B2028.html</link><description># 反向输出一个三位数
 ## 题目简单重在了解字符串反转
 ```python
 n = input().strip()

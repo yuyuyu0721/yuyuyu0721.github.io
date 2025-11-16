@@ -11,82 +11,30 @@
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
 <meta name="description" content="# P1150 Peter 的烟
-## 题目描述
-Peter有n根烟，`k（k>1)`个烟蒂可以换一个新烟
-输入格式 一行包括两个整数`n,k(1<n,k<10**8)`
-输出格式一个整数包括最终烟的根数
-```python
-n, k = map(int, input().split())
-total = n  # 初始的烟
-butts = n  # 初始的烟蒂
-#当烟蒂数量足够兑换新烟时
-while butts >= k:
-    # 计算能换多少根新烟
-    new_cigarettes = butts // k
-    total += new_cigarettes  # 加上新换的烟
-    # 更新烟蒂数量:兑换后剩余的烟蒂 + 新烟吸完产生的烟蒂
-    butts = (butts % k) + new_cigarettes
-print(total)
-```
-> [!NOTE]
-本题重在理解新烟和新烟蒂的变化(要能想到将n初始的输出值改为两个变量)即以下所展示的代码
-`new_cigarettes = butts // k`和 `butts = (butts % k) + new_cigarettes` 
->
+## 原题描述# P1150 Peter 的烟
 
-# 举个例子
-## 初始条件
-*  `k=4`:兑换比例为四个烟蒂换一个新烟
-*  `total=4`:初始的烟为4
-*  `butts=4`:抽完初始的烟后产生的烟蒂为4
-## while循环条件判断
-*  `butts>=k`:判断烟蒂数量是否大于或者等于烟与烟蒂的兑换比例(即是否能换新烟）
-## while循环条件符合执行其中语句块
-*  兑换的新烟:` new_cigarettes = butts // k =4//4=1`
-*  兑换完后烟的总数:`total += new_cigarettes=1(新烟）+4（初始的烟）=5`
-*  更新烟蒂数量:` butts = (butts % k) + new_cigarettes`兑换后剩余的烟蒂+新烟吸完后产生的新烟蒂=0+1=1
-### 总结
-本题在做的时候重在能想到将一个输出名改为两个变量名 如果是单纯理解代码则重在理解新烟和新烟蒂的变化
-主要使用while循环和运算符运用
-。">
+## 题目背景
+
+**温馨提醒：吸烟有害健康，请勿尝试吸烟！**
+
+## 题目描述
+
+Peter 有 n 根烟，他每吸完一根烟就把烟蒂保存起来，k（k>1）个烟蒂可以换一个新的烟，那么 Peter 最终能吸到多少根烟呢？
+
+与某些脑筋急转弯不同的是，Peter 并不能从异次元借到烟蒂，抽完后再还回去。">
 <meta property="og:title" content="p1150">
 <meta property="og:description" content="# P1150 Peter 的烟
-## 题目描述
-Peter有n根烟，`k（k>1)`个烟蒂可以换一个新烟
-输入格式 一行包括两个整数`n,k(1<n,k<10**8)`
-输出格式一个整数包括最终烟的根数
-```python
-n, k = map(int, input().split())
-total = n  # 初始的烟
-butts = n  # 初始的烟蒂
-#当烟蒂数量足够兑换新烟时
-while butts >= k:
-    # 计算能换多少根新烟
-    new_cigarettes = butts // k
-    total += new_cigarettes  # 加上新换的烟
-    # 更新烟蒂数量:兑换后剩余的烟蒂 + 新烟吸完产生的烟蒂
-    butts = (butts % k) + new_cigarettes
-print(total)
-```
-> [!NOTE]
-本题重在理解新烟和新烟蒂的变化(要能想到将n初始的输出值改为两个变量)即以下所展示的代码
-`new_cigarettes = butts // k`和 `butts = (butts % k) + new_cigarettes` 
->
+## 原题描述# P1150 Peter 的烟
 
-# 举个例子
-## 初始条件
-*  `k=4`:兑换比例为四个烟蒂换一个新烟
-*  `total=4`:初始的烟为4
-*  `butts=4`:抽完初始的烟后产生的烟蒂为4
-## while循环条件判断
-*  `butts>=k`:判断烟蒂数量是否大于或者等于烟与烟蒂的兑换比例(即是否能换新烟）
-## while循环条件符合执行其中语句块
-*  兑换的新烟:` new_cigarettes = butts // k =4//4=1`
-*  兑换完后烟的总数:`total += new_cigarettes=1(新烟）+4（初始的烟）=5`
-*  更新烟蒂数量:` butts = (butts % k) + new_cigarettes`兑换后剩余的烟蒂+新烟吸完后产生的新烟蒂=0+1=1
-### 总结
-本题在做的时候重在能想到将一个输出名改为两个变量名 如果是单纯理解代码则重在理解新烟和新烟蒂的变化
-主要使用while循环和运算符运用
-。">
+## 题目背景
+
+**温馨提醒：吸烟有害健康，请勿尝试吸烟！**
+
+## 题目描述
+
+Peter 有 n 根烟，他每吸完一根烟就把烟蒂保存起来，k（k>1）个烟蒂可以换一个新的烟，那么 Peter 最终能吸到多少根烟呢？
+
+与某些脑筋急转弯不同的是，Peter 并不能从异次元借到烟蒂，抽完后再还回去。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://blog.yuyuyu0721.top /post/p1150.html">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Meekdai/meekdai.github.io/logo64.jpg ">
@@ -158,6 +106,32 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
     <div id="content">
 <div class="markdown-body" id="postBody"><h1>P1150 Peter 的烟</h1>
+<h2>原题描述# P1150 Peter 的烟</h2>
+<h2>题目背景</h2>
+<p><strong>温馨提醒：吸烟有害健康，请勿尝试吸烟！</strong></p>
+<h2>题目描述</h2>
+<p>Peter 有 n 根烟，他每吸完一根烟就把烟蒂保存起来，k（k&gt;1）个烟蒂可以换一个新的烟，那么 Peter 最终能吸到多少根烟呢？</p>
+<p>与某些脑筋急转弯不同的是，Peter 并不能从异次元借到烟蒂，抽完后再还回去。</p>
+<h2>输入格式</h2>
+<p>每组测试数据一行包括两个整数 n, k（1 &lt; n, k &lt;=10^8）。</p>
+<h2>输出格式</h2>
+<p>对于每组测试数据，输出一行包括一个整数表示最终烟的根数。</p>
+<h2>输入输出样例 #1</h2>
+<h3>输入 #1</h3>
+<pre class="notranslate"><code class="notranslate">4 3
+</code></pre>
+<h3>输出 #1</h3>
+<pre class="notranslate"><code class="notranslate">5
+</code></pre>
+<h2>输入输出样例 #2</h2>
+<h3>输入 #2</h3>
+<pre class="notranslate"><code class="notranslate">10 3
+</code></pre>
+<h3>输出 #2</h3>
+<pre class="notranslate"><code class="notranslate">14
+</code></pre>
+<h2>说明/提示</h2>
+<p>对于 100%的数据，1&lt;n, k &lt;=10^8。</p>
 <h2>题目描述</h2>
 <p>Peter有n根烟，<code class="notranslate">k（k&gt;1)</code>个烟蒂可以换一个新烟<br>
 输入格式 一行包括两个整数<code class="notranslate">n,k(1&lt;n,k&lt;10**8)</code><br>
