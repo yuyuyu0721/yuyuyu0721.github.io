@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top </link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4 </url><title>avatar</title><link>https://blog.yuyuyu0721.top </link></image><lastBuildDate>Sun, 16 Nov 2025 07:14:52 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>p1150</title><link>https://blog.yuyuyu0721.top /post/p1150.html</link><description># P1150 Peter 的烟
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top </link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4 </url><title>avatar</title><link>https://blog.yuyuyu0721.top </link></image><lastBuildDate>Sun, 16 Nov 2025 07:23:53 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>p1150</title><link>https://blog.yuyuyu0721.top /post/p1150.html</link><description># P1150 Peter 的烟
 ## 题目描述
 Peter有n根烟，`k（k&gt;1)`个烟蒂可以换一个新烟
 输入格式 一行包括两个整数`n,k(1&lt;n,k&lt;10**8)`
@@ -22,17 +22,17 @@ print(total)
 `new_cigarettes = butts // k`和 `butts = (butts % k) + new_cigarettes` 
 &gt;
 
-### 举个例子
+# 举个例子
 ## 初始条件
-*`k=4`:兑换比例为四个烟蒂换一个新烟
-*`total=4`:初始的烟为4
-*`butts=4`:抽完初始的烟后产生的烟蒂为4
+*  `k=4`:兑换比例为四个烟蒂换一个新烟
+*  `total=4`:初始的烟为4
+*  `butts=4`:抽完初始的烟后产生的烟蒂为4
 ## while循环条件判断
-*`butts&gt;=k`:判断烟蒂数量是否大于或者等于烟与烟蒂的兑换比例(即是否能换新烟）
+*  `butts&gt;=k`:判断烟蒂数量是否大于或者等于烟与烟蒂的兑换比例(即是否能换新烟）
 ## while循环条件符合执行其中语句块
-*兑换的新烟:` new_cigarettes = butts // k =4//4=1`
-*兑换完后烟的总数:`total += new_cigarettes=1(新烟）+4（初始的烟）=5`
-*更新烟蒂数量:` butts = (butts % k) + new_cigarettes`兑换后剩余的烟蒂+新烟吸完后产生的新烟蒂=0+1=1
+*  兑换的新烟:` new_cigarettes = butts // k =4//4=1`
+*  兑换完后烟的总数:`total += new_cigarettes=1(新烟）+4（初始的烟）=5`
+*  更新烟蒂数量:` butts = (butts % k) + new_cigarettes`兑换后剩余的烟蒂+新烟吸完后产生的新烟蒂=0+1=1
 ### 总结
 本题在做的时候重在能想到将一个输出名改为两个变量名 如果是单纯理解代码则重在理解新烟和新烟蒂的变化
 主要使用while循环和运算符运用
