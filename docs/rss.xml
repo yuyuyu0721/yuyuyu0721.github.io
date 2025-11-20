@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top </link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4 </url><title>avatar</title><link>https://blog.yuyuyu0721.top </link></image><lastBuildDate>Mon, 17 Nov 2025 16:36:44 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>B2043</title><link>https://blog.yuyuyu0721.top /post/B2043.html</link><description># B2043 判断能否被 3，5，7 整除
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top </link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4 </url><title>avatar</title><link>https://blog.yuyuyu0721.top </link></image><lastBuildDate>Thu, 20 Nov 2025 13:49:21 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>B2043</title><link>https://blog.yuyuyu0721.top /post/B2043.html</link><description># B2043 判断能否被 3，5，7 整除
 
 ## 题目描述
 
@@ -97,6 +97,8 @@ else:
 *斜体* **加粗**
 [url跳转链接](https://www.bilibili.com/)
 
+* 提示点
+
 &gt;[!NOTE]
 NOTE提示
 &gt;
@@ -131,7 +133,7 @@ print('hello world')#大代码块
 依次类推
 *斜体* **加粗**
 [url跳转链接](bilibili.com)
-
+* 提示点
 &gt;[!NOTE]
 NOTE提示
 &gt;
