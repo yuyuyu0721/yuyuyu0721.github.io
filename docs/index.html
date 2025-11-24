@@ -23,7 +23,24 @@
 body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
 #header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
 #footer {margin-top:64px; text-align: center;font-size: small;}
-
+/* 新增：文章计数样式 */
+#articleCount {
+    margin-left: 12px;
+    font-size: 18px;
+    color: #666;
+    transition: color 0.3s;
+}
+[data-color-mode="dark"] #articleCount {
+    color: #bbb;
+}
+@media (max-width: 600px) {
+    #articleCount {
+        display: block;
+        margin-left: 0;
+        margin-top: 8px;
+        font-size: 16px;
+    }
+}
 </style>
 
 <style>
@@ -56,7 +73,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <body>
     <div id="header">
 <h1>
-    <img src="https://avatars.githubusercontent.com/u/242206735?v=4 " class="avatar circle" id="avatarImg" alt="avatar"><a class="blogTitle">玉与遇</a></h1>
+    <img src="https://avatars.githubusercontent.com/u/242206735?v=4 " class="avatar circle" id="avatarImg" alt="avatar"><a class="blogTitle">玉与遇</a>
+    <span id="articleCount"></span> <!-- 新增：计数显示容器 -->
+</h1>
 <div class="title-right">
     <a href="https://blog.yuyuyu0721.top /tag.html" id="buttonSearch" class="btn btn-invisible circle" title="搜索">
         <svg class="octicon" width="16" height="16" >
@@ -261,7 +280,20 @@ document.getElementById("Music").setAttribute("d",value=IconList["Music"]);
 document.getElementById("遇缘Mizuki博客").setAttribute("d",value=IconList["遇缘Mizuki博客"]);
 document.getElementById("JEET博客友链").setAttribute("d",value=IconList["JEET博客友链"]);
 
-
+// 新增：文章计数核心逻辑
+fetch('/blogBase.json?v=' + new Date().getTime()) // 加时间戳避免缓存
+  .then(response => {
+    if (!response.ok) throw new Error('未找到文章列表文件');
+    return response.json();
+  })
+  .then(posts => {
+    const total = posts.length;
+    document.getElementById('articleCount').textContent = `（共 ${total} 篇文章）`;
+  })
+  .catch(error => {
+    console.log('文章计数加载失败：', error);
+    // 失败时不显示计数，不影响页面正常使用
+  });
 </script>
 <script src='https://blog.154451.xyz/assets/NumPagination.js '></script>
 
