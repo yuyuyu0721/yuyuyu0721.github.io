@@ -137,45 +137,6 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         <span class="pl-s1">hour</span><span class="pl-c1">=</span><span class="pl-s1">total</span>
         <span class="pl-s1">unhappy_day</span><span class="pl-c1">=</span><span class="pl-s1">day</span>
 <span class="pl-en">print</span>(<span class="pl-s1">unhappy_day</span>)</pre></div>
-<h1>题解(2)</h1>
-<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">def</span> <span class="pl-en">unhappy</span>(<span class="pl-s1">x</span>,<span class="pl-s1">y</span>):<span class="pl-c">#计算不高兴值公式</span>
-    <span class="pl-s1">a</span><span class="pl-c1">=</span><span class="pl-s1">x</span><span class="pl-c1">+</span><span class="pl-s1">y</span>
-    <span class="pl-k">return</span> <span class="pl-en">max</span>(<span class="pl-s1">a</span> <span class="pl-c1">-</span> <span class="pl-c1">8</span>, <span class="pl-c1">0</span>)
-<span class="pl-s1">day</span><span class="pl-c1">=</span>[]<span class="pl-c">#创建空列表来进行每天数据的存储</span>
-<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">7</span>):<span class="pl-c">#获取输入的数值并将数值填入列表中</span>
-    <span class="pl-s1">school</span>,<span class="pl-s1">kewai</span><span class="pl-c1">=</span><span class="pl-en">map</span>(<span class="pl-s1">int</span>,<span class="pl-en">input</span>().<span class="pl-c1">split</span>())
-    <span class="pl-s1">day</span>.<span class="pl-c1">append</span>(<span class="pl-en">unhappy</span>(<span class="pl-s1">school</span>,<span class="pl-s1">kewai</span>))
-<span class="pl-s1">first_unhappy</span><span class="pl-c1">=</span><span class="pl-c1">0</span><span class="pl-c">#创建计数器用于记录哪天最不开心</span>
-<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">7</span>):<span class="pl-c">#历遍day列表里面的值，选出最大的值保存</span>
-    <span class="pl-k">if</span> <span class="pl-s1">day</span>[<span class="pl-s1">i</span>]<span class="pl-c1">&gt;</span><span class="pl-s1">day</span>[<span class="pl-s1">first_unhappy</span>]:<span class="pl-c">#如果当前的不开心值大于first_unhappy</span>
-        <span class="pl-s1">first_unhappy</span><span class="pl-c1">=</span><span class="pl-s1">i</span><span class="pl-c">#以最大值替换掉当前的值</span>
-<span class="pl-k">if</span> <span class="pl-en">max</span>(<span class="pl-s1">day</span>) <span class="pl-c1">==</span> <span class="pl-c1">0</span>:<span class="pl-c">#输出做判断</span>
-    <span class="pl-en">print</span>(<span class="pl-c1">0</span>)
-<span class="pl-k">else</span>:
-    <span class="pl-en">print</span>(<span class="pl-s1">first_unhappy</span> <span class="pl-c1">+</span> <span class="pl-c1">1</span>)<span class="pl-c">#列表索引从0开始的，所以要加一位</span></pre></div>
-<h1>题解(3)</h1>
-<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># 用列表存储7天的总时长（索引0对应周一，索引6对应周日）</span>
-<span class="pl-s1">total_hours</span> <span class="pl-c1">=</span> []
-
-<span class="pl-c"># 读取7天的数据并计算总时长，存入列表</span>
-<span class="pl-k">for</span> <span class="pl-s1">_</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">7</span>):
-    <span class="pl-s1">school</span>, <span class="pl-s1">mom</span> <span class="pl-c1">=</span> <span class="pl-en">map</span>(<span class="pl-s1">int</span>, <span class="pl-en">input</span>().<span class="pl-c1">split</span>())
-    <span class="pl-s1">total</span> <span class="pl-c1">=</span> <span class="pl-s1">school</span> <span class="pl-c1">+</span> <span class="pl-s1">mom</span>
-    <span class="pl-s1">total_hours</span>.<span class="pl-c1">append</span>(<span class="pl-s1">total</span>)
-
-<span class="pl-c"># 初始化最大时长和对应星期（默认0表示不不高兴）</span>
-<span class="pl-s1">max_total</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>
-<span class="pl-s1">result_day</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>
-
-<span class="pl-c"># 遍历列表，寻找最不高兴的日子</span>
-<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">7</span>):
-    <span class="pl-c"># 当前天的总时长超过8小时，且比之前记录的最大时长更长</span>
-    <span class="pl-k">if</span> <span class="pl-s1">total_hours</span>[<span class="pl-s1">i</span>] <span class="pl-c1">&gt;</span> <span class="pl-c1">8</span> <span class="pl-c1">and</span> <span class="pl-s1">total_hours</span>[<span class="pl-s1">i</span>] <span class="pl-c1">&gt;</span> <span class="pl-s1">max_total</span>:
-        <span class="pl-s1">max_total</span> <span class="pl-c1">=</span> <span class="pl-s1">total_hours</span>[<span class="pl-s1">i</span>]
-        <span class="pl-c"># 星期是索引+1（因为索引0是周一）</span>
-        <span class="pl-s1">result_day</span> <span class="pl-c1">=</span> <span class="pl-s1">i</span> <span class="pl-c1">+</span> <span class="pl-c1">1</span>
-
-<span class="pl-en">print</span>(<span class="pl-s1">result_day</span>)</pre></div>
 <h1>题解(1)讲解</h1>
 <h2>先决条件</h2>
 <ul>
@@ -210,6 +171,22 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <ul>
 <li>当括号内为三个参数时<code class="notranslate">range('起始数字，结束数字，步长') </code></li>
 </ul>
+<h1>题解(2)</h1>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">def</span> <span class="pl-en">unhappy</span>(<span class="pl-s1">x</span>,<span class="pl-s1">y</span>):<span class="pl-c">#计算不高兴值公式</span>
+    <span class="pl-s1">a</span><span class="pl-c1">=</span><span class="pl-s1">x</span><span class="pl-c1">+</span><span class="pl-s1">y</span>
+    <span class="pl-k">return</span> <span class="pl-en">max</span>(<span class="pl-s1">a</span> <span class="pl-c1">-</span> <span class="pl-c1">8</span>, <span class="pl-c1">0</span>)
+<span class="pl-s1">day</span><span class="pl-c1">=</span>[]<span class="pl-c">#创建空列表来进行每天数据的存储</span>
+<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">7</span>):<span class="pl-c">#获取输入的数值并将数值填入列表中</span>
+    <span class="pl-s1">school</span>,<span class="pl-s1">kewai</span><span class="pl-c1">=</span><span class="pl-en">map</span>(<span class="pl-s1">int</span>,<span class="pl-en">input</span>().<span class="pl-c1">split</span>())
+    <span class="pl-s1">day</span>.<span class="pl-c1">append</span>(<span class="pl-en">unhappy</span>(<span class="pl-s1">school</span>,<span class="pl-s1">kewai</span>))
+<span class="pl-s1">first_unhappy</span><span class="pl-c1">=</span><span class="pl-c1">0</span><span class="pl-c">#创建计数器用于记录哪天最不开心</span>
+<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">7</span>):<span class="pl-c">#历遍day列表里面的值，选出最大的值保存</span>
+    <span class="pl-k">if</span> <span class="pl-s1">day</span>[<span class="pl-s1">i</span>]<span class="pl-c1">&gt;</span><span class="pl-s1">day</span>[<span class="pl-s1">first_unhappy</span>]:<span class="pl-c">#如果当前的不开心值大于first_unhappy</span>
+        <span class="pl-s1">first_unhappy</span><span class="pl-c1">=</span><span class="pl-s1">i</span><span class="pl-c">#以最大值替换掉当前的值</span>
+<span class="pl-k">if</span> <span class="pl-en">max</span>(<span class="pl-s1">day</span>) <span class="pl-c1">==</span> <span class="pl-c1">0</span>:<span class="pl-c">#输出做判断</span>
+    <span class="pl-en">print</span>(<span class="pl-c1">0</span>)
+<span class="pl-k">else</span>:
+    <span class="pl-en">print</span>(<span class="pl-s1">first_unhappy</span> <span class="pl-c1">+</span> <span class="pl-c1">1</span>)<span class="pl-c">#列表索引从0开始的，所以要加一位</span></pre></div>
 <h1>题解(2)讲解</h1>
 <div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p>此法运用def函数和for                                                                                                                                                                                                                                                                                                           循环运行，难度较为高</p>
 </div>
@@ -247,6 +224,29 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <ul>
 <li><code class="notranslate">print(first_unhappy + 1)</code>加1是因为上文的索引索引是从0开始的，即<code class="notranslate">day[0]</code>时输出的则是第一天的学习时长1的时候则为第二天，而题目要求我们转换为星期则加1</li>
 </ul>
+<h1>题解(3)</h1>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># 用列表存储7天的总时长（索引0对应周一，索引6对应周日）</span>
+<span class="pl-s1">total_hours</span> <span class="pl-c1">=</span> []
+
+<span class="pl-c"># 读取7天的数据并计算总时长，存入列表</span>
+<span class="pl-k">for</span> <span class="pl-s1">_</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">7</span>):
+    <span class="pl-s1">school</span>, <span class="pl-s1">mom</span> <span class="pl-c1">=</span> <span class="pl-en">map</span>(<span class="pl-s1">int</span>, <span class="pl-en">input</span>().<span class="pl-c1">split</span>())
+    <span class="pl-s1">total</span> <span class="pl-c1">=</span> <span class="pl-s1">school</span> <span class="pl-c1">+</span> <span class="pl-s1">mom</span>
+    <span class="pl-s1">total_hours</span>.<span class="pl-c1">append</span>(<span class="pl-s1">total</span>)
+
+<span class="pl-c"># 初始化最大时长和对应星期（默认0表示不不高兴）</span>
+<span class="pl-s1">max_total</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>
+<span class="pl-s1">result_day</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>
+
+<span class="pl-c"># 遍历列表，寻找最不高兴的日子</span>
+<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">7</span>):
+    <span class="pl-c"># 当前天的总时长超过8小时，且比之前记录的最大时长更长</span>
+    <span class="pl-k">if</span> <span class="pl-s1">total_hours</span>[<span class="pl-s1">i</span>] <span class="pl-c1">&gt;</span> <span class="pl-c1">8</span> <span class="pl-c1">and</span> <span class="pl-s1">total_hours</span>[<span class="pl-s1">i</span>] <span class="pl-c1">&gt;</span> <span class="pl-s1">max_total</span>:
+        <span class="pl-s1">max_total</span> <span class="pl-c1">=</span> <span class="pl-s1">total_hours</span>[<span class="pl-s1">i</span>]
+        <span class="pl-c"># 星期是索引+1（因为索引0是周一）</span>
+        <span class="pl-s1">result_day</span> <span class="pl-c1">=</span> <span class="pl-s1">i</span> <span class="pl-c1">+</span> <span class="pl-c1">1</span>
+
+<span class="pl-en">print</span>(<span class="pl-s1">result_day</span>)</pre></div>
 <h1>题解(3)讲解</h1>
 <p>本解法不过多赘述与上文题解(2)讲解相差无几只是少了def函数</p>
 <h1>总结</h1>
