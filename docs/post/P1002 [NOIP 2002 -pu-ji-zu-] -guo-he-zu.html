@@ -235,12 +235,12 @@ B(即终点)为<code class="notranslate">(6,6)</code>,马为<code class="notrans
 <ul>
 <li><code class="notranslate">print(dp[n][m])</code>把此位置(即终点)上的数输出出来就是路径数</li>
 </ul>
-<p>#答疑解惑(更详细的说明一些问题)</p>
-<h2>问一:'为什么<code class="notranslate">dp=[[0]*(m+1) for _ in range(n+1)]</code>不能换为<code class="notranslate">dp=[[0]*(n+1) for _ in range(m+1)]</code>'</h2>
+<h1>答疑解惑(更详细的说明一些问题)</h1>
+<h3>问一:'为什么<code class="notranslate">dp=[[0]*(m+1) for _ in range(n+1)]</code>不能换为<code class="notranslate">dp=[[0]*(n+1) for _ in range(m+1)]</code>'</h3>
 <ul>
 <li>在本题内此举确实可以输出正确,但是却仍会得不到满分,主要是逻辑问题,以<code class="notranslate">n=2</code>,<code class="notranslate">m=3</code>举例由3列4行变为4列3行导致后面索引可能出错</li>
 </ul>
-<h2>问二:'为什么用<code class="notranslate">block=set()</code>集合来做,用列表不也能照样ac'</h2>
+<h3>问二:'为什么用<code class="notranslate">block=set()</code>集合来做,用列表不也能照样ac'</h3>
 <ul>
 <li>列表确实能做,是不可否认的,但是集合用来存储障碍更快且更简洁,例如用列表就必须先将马的位置标记为-1后续再做判断落点是否为-1,而集合就不用可以直接用<code class="notranslate">in</code>也省略了前面的赋值</li>
 </ul>
