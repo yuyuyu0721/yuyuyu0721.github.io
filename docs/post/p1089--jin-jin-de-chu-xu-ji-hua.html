@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://blog.yuyuyu0721.top /post/p1089--jin-jin-de-chu-xu-ji-hua.html">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Meekdai/meekdai.github.io/logo64.jpg ">
 <title>p1089-津津的储蓄计划</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
 </head>
@@ -148,22 +148,21 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>如果津津的总钱小于花销预算则输出当前月份的负数，反之输出最终总钱</li>
 </ul>
 <h1>题目题解</h1>
-<pre lang="python" class="notranslate"><code class="notranslate">mom_total=0 
-total=0 
-for month in range(1, 13):
-    huaxiao=int(input())
-    total=total+300 
-    if huaxiao&gt;total: 
-        print(-month) 
-        exit()
-    total=total-huaxiao 
-    if total&gt;=100: 
-        borrow=total//100*100 
-        mom_total=mom_total+borrow
-        total=total-borrow
-total=total+mom_total*1.2
-print(int(total))
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">mom_total</span><span class="pl-c1">=</span><span class="pl-c1">0</span> 
+<span class="pl-s1">total</span><span class="pl-c1">=</span><span class="pl-c1">0</span> 
+<span class="pl-k">for</span> <span class="pl-s1">month</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">1</span>, <span class="pl-c1">13</span>):
+    <span class="pl-s1">huaxiao</span><span class="pl-c1">=</span><span class="pl-en">int</span>(<span class="pl-en">input</span>())
+    <span class="pl-s1">total</span><span class="pl-c1">=</span><span class="pl-s1">total</span><span class="pl-c1">+</span><span class="pl-c1">300</span> 
+    <span class="pl-k">if</span> <span class="pl-s1">huaxiao</span><span class="pl-c1">&gt;</span><span class="pl-s1">total</span>: 
+        <span class="pl-en">print</span>(<span class="pl-c1">-</span><span class="pl-s1">month</span>) 
+        <span class="pl-en">exit</span>()
+    <span class="pl-s1">total</span><span class="pl-c1">=</span><span class="pl-s1">total</span><span class="pl-c1">-</span><span class="pl-s1">huaxiao</span> 
+    <span class="pl-k">if</span> <span class="pl-s1">total</span><span class="pl-c1">&gt;=</span><span class="pl-c1">100</span>: 
+        <span class="pl-s1">borrow</span><span class="pl-c1">=</span><span class="pl-s1">total</span><span class="pl-c1">//</span><span class="pl-c1">100</span><span class="pl-c1">*</span><span class="pl-c1">100</span> 
+        <span class="pl-s1">mom_total</span><span class="pl-c1">=</span><span class="pl-s1">mom_total</span><span class="pl-c1">+</span><span class="pl-s1">borrow</span>
+        <span class="pl-s1">total</span><span class="pl-c1">=</span><span class="pl-s1">total</span><span class="pl-c1">-</span><span class="pl-s1">borrow</span>
+<span class="pl-s1">total</span><span class="pl-c1">=</span><span class="pl-s1">total</span><span class="pl-c1">+</span><span class="pl-s1">mom_total</span><span class="pl-c1">*</span><span class="pl-c1">1.2</span>
+<span class="pl-en">print</span>(<span class="pl-en">int</span>(<span class="pl-s1">total</span>))</pre></div>
 <h1>题目讲解</h1>
 <h2>初始化变量</h2>
 <p>上文提到过’津津的总钱‘和’妈妈的总钱‘那么我们就可以知道两个初始化变量</p>
