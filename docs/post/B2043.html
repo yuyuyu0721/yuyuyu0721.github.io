@@ -41,7 +41,7 @@
 <meta property="og:url" content="https://blog.yuyuyu0721.top /post/B2043.html">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Meekdai/meekdai.github.io/logo64.jpg ">
 <title>B2043</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
 </head>
@@ -132,34 +132,32 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <ul>
 <li>正常写法，行数较多，结构重复简单主用if与elif语句进行编程，不过多赘述</li>
 </ul>
-<pre lang="python" class="notranslate"><code class="notranslate">x=int(input())
-if x%3==0 and x%5==0 and x%7==0:
-    print('3 5 7')
-elif x%3==0 and x%5==0:
-    print('3 5')
-elif x%3==0 and x%7==0:
-    print('3 7')
-elif x%5==0 and x%7==0:
-    print('5 7')
-elif x%7==0 or x%3==0 or x%5==0:
-    print('x')
-else:
-    print('n')
-</code></pre>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">x</span><span class="pl-c1">=</span><span class="pl-en">int</span>(<span class="pl-en">input</span>())
+<span class="pl-k">if</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">3</span><span class="pl-c1">==</span><span class="pl-c1">0</span> <span class="pl-c1">and</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">5</span><span class="pl-c1">==</span><span class="pl-c1">0</span> <span class="pl-c1">and</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">7</span><span class="pl-c1">==</span><span class="pl-c1">0</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">'3 5 7'</span>)
+<span class="pl-k">elif</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">3</span><span class="pl-c1">==</span><span class="pl-c1">0</span> <span class="pl-c1">and</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">5</span><span class="pl-c1">==</span><span class="pl-c1">0</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">'3 5'</span>)
+<span class="pl-k">elif</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">3</span><span class="pl-c1">==</span><span class="pl-c1">0</span> <span class="pl-c1">and</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">7</span><span class="pl-c1">==</span><span class="pl-c1">0</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">'3 7'</span>)
+<span class="pl-k">elif</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">5</span><span class="pl-c1">==</span><span class="pl-c1">0</span> <span class="pl-c1">and</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">7</span><span class="pl-c1">==</span><span class="pl-c1">0</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">'5 7'</span>)
+<span class="pl-k">elif</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">7</span><span class="pl-c1">==</span><span class="pl-c1">0</span> <span class="pl-c1">or</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">3</span><span class="pl-c1">==</span><span class="pl-c1">0</span> <span class="pl-c1">or</span> <span class="pl-s1">x</span><span class="pl-c1">%</span><span class="pl-c1">5</span><span class="pl-c1">==</span><span class="pl-c1">0</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">'x'</span>)
+<span class="pl-k">else</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">'n'</span>)</pre></div>
 <ul>
 <li>简洁写法 重点在于这个脱离了常规if写法运用了for循环和列表添加</li>
 </ul>
-<pre lang="python" class="notranslate"><code class="notranslate">x = int(input())
-divs = []
-for d in (3, 5, 7):
-    if x % d == 0:
-        divs.append(str(d))
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">x</span> <span class="pl-c1">=</span> <span class="pl-en">int</span>(<span class="pl-en">input</span>())
+<span class="pl-s1">divs</span> <span class="pl-c1">=</span> []
+<span class="pl-k">for</span> <span class="pl-s1">d</span> <span class="pl-c1">in</span> (<span class="pl-c1">3</span>, <span class="pl-c1">5</span>, <span class="pl-c1">7</span>):
+    <span class="pl-k">if</span> <span class="pl-s1">x</span> <span class="pl-c1">%</span> <span class="pl-s1">d</span> <span class="pl-c1">==</span> <span class="pl-c1">0</span>:
+        <span class="pl-s1">divs</span>.<span class="pl-c1">append</span>(<span class="pl-en">str</span>(<span class="pl-s1">d</span>))
 
-if divs:
-    print(" ".join(divs))
-else:
-    print('n')
-</code></pre>
+<span class="pl-k">if</span> <span class="pl-s1">divs</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">" "</span>.<span class="pl-c1">join</span>(<span class="pl-s1">divs</span>))
+<span class="pl-k">else</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">'n'</span>)</pre></div>
 <h1>实例演示</h1>
 <h2>初始条件</h2>
 <ul>
