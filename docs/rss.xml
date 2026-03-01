@@ -1,5 +1,50 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top </link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4 </url><title>avatar</title><link>https://blog.yuyuyu0721.top </link></image><lastBuildDate>Tue, 23 Dec 2025 18:20:28 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>P1002 [NOIP 2002 普及组] 过河卒</title><link>https://blog.yuyuyu0721.top /post/P1002%20%5BNOIP%202002%20-pu-ji-zu-%5D%20-guo-he-zu.html</link><description># P1002 [NOIP 2002 普及组] 过河卒
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>玉与遇</title><link>https://blog.yuyuyu0721.top </link><description>我很帅</description><copyright>玉与遇</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/242206735?v=4 </url><title>avatar</title><link>https://blog.yuyuyu0721.top </link></image><lastBuildDate>Sun, 01 Mar 2026 11:28:03 +0000</lastBuildDate><managingEditor>玉与遇</managingEditor><ttl>60</ttl><webMaster>玉与遇</webMaster><item><title>html常用语法</title><link>https://blog.yuyuyu0721.top /post/html-chang-yong-yu-fa.html</link><description>
+# HTML 日常使用语法指南
+
+## 1. 文档基本结构
+```markdown
+每个 HTML 文档都需要以下基本结构：
+
+html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        页面内容写在这里
+    &lt;/body&gt;
+&lt;/html&gt;
+```
+* 图例
+
+&lt;img width='497' height='204' alt='Image' src='https://github.com/user-attachments/assets/93e6c0e9-b2a2-4307-b9f9-f668d60d4d08' /&gt;
+
+---
+
+## 2. 标题标签
+
+HTML 提供 6 个级别的标题，从大到小：
+
+```html
+&lt;h1&gt;这是一级标题（最大）&lt;/h1&gt;
+&lt;h2&gt;这是二级标题&lt;/h2&gt;
+&lt;h3&gt;这是三级标题&lt;/h3&gt;
+&lt;h4&gt;这是四级标题&lt;/h4&gt;
+&lt;h5&gt;这是五级标题&lt;/h5&gt;
+&lt;h6&gt;这是六级标题（最小）&lt;/h6&gt;
+```
+* 图例
+
+&lt;img width='579' height='456' alt='Image' src='https://github.com/user-attachments/assets/286b4164-80db-43f8-a133-b8c9e448a08b' /&gt;
+
+---
+
+## 3. 段落与文本格式
+
+### 3.1 段落标签 `&lt;p&gt;`
+
+```html
+&lt;p&gt;这是一个段落&lt;/p&gt;
+&lt;p&gt;这是第二个段落。</description><guid isPermaLink="true">https://blog.yuyuyu0721.top /post/html-chang-yong-yu-fa.html</guid><pubDate>Sun, 01 Mar 2026 11:27:37 +0000</pubDate></item><item><title>P1002 [NOIP 2002 普及组] 过河卒</title><link>https://blog.yuyuyu0721.top /post/P1002%20%5BNOIP%202002%20-pu-ji-zu-%5D%20-guo-he-zu.html</link><description># P1002 [NOIP 2002 普及组] 过河卒
 
 ## 题目描述
 
