@@ -147,7 +147,19 @@ plt.show()
 >
 ---
 
-## 八、常见报错与注意事项
+## 八、矩阵相加
+|------|------|
+| `np.eye(6)` | 创建矩阵（6*6） |
+| `np.eye(6).T` | 反转矩阵 |
+| `np.dot(a1,a2) | 矩阵相乘 |
+
+<img width="474" height="324" alt="Image" src="https://github.com/user-attachments/assets/6727a59c-5925-4f72-855d-06faef137972" />
+
+<img width="432" height="126" alt="Image" src="https://github.com/user-attachments/assets/660abe21-c77f-4ae5-a55e-1f205a73a9b5" />
+
+* 这里主要讲解图二，矩阵与矩阵相乘规则为：a矩阵第一行与a1矩阵第一列相乘得出a2矩阵第一行第一列，a矩阵第一行与a1矩阵第二列相乘得出a2矩阵第一行第二列，下面a2矩阵第二行以上规则进行
+
+## 九、常见报错与注意事项
 1. **reshape 报错**：`ValueError: cannot reshape array of size 30 into shape (6,6)`
    - 原因：变形前后元素总数不匹配（30 ≠ 36）
    - 解决：确保 `行数 × 列数 = 元素总个数`
@@ -156,7 +168,7 @@ plt.show()
 
 ---
 
-## 九、完整代码示例
+## 十、完整代码示例
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
