@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css ' rel='stylesheet' />
+    <script src='https://blog.154451.xyz/assets/GmeekBSZ.js '></script><script src='https://blog.154451.xyz/assets/yifantheme.js '></script><script src='https://blog.154451.xyz/assets/live2d.js '></script>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/242206735?v=4 "><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# NumPy + Matplotlib + OS 核心操作总结
+
+## 一、基础导入库
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+```
+>[!NOTE]
+以上库若在pycharm中运用需提前安装配置好环境
+可在anaconda的jupyter中进行编写
+>
+
+---
+
+## 二、NumPy 数组创建与基础属性
+### 1. 数组创建
+
+| 代码 | 说明 |
+|------|------|
+| `np.array([1])` | 创建一维数组 |
+| `np.array([[1,2],[2,33]])` | 创建二维数组 |
+| `np.ones(shape=(3,4))` | 生成 3行4列全1数组 |
+| `np.eye(6)` | 生成 6×6 单位矩阵（对角线为1，其余为0） |
+| `np.linspace(0,100,num=20)` | 生成 0~100 等差数列，共20个数据 |
+| `np.arange(10,50,step=2)` | 生成 10~50 等差数列，步长为2 |
+| `np.random.randint(0,100,size=(5,6))` | 生成 5行6列随机整数数组（范围0~100） |
+
+### 2. NumPy中array创建数组操作优先级
+
+| 代码 | 说明 |
+|------|------|
+| `np.array([12,1.1,'2'])` | 混合类型自动转为字符串数组 |
+| `np.array([1.2,2])` | 混合数值自动向上转换为浮点数 |
+| `np.array(['1.2',2])` | 字符串+数字 转为 字符串数组 |
+
+* 由此可知
+  - 数组：数组存储数据的类型必须是统一类型
+    - 优先级：字符串>浮点数>整数
+
+### 3. 数组属性查询
+
+| 代码 | 说明 |
+|------|------|
+| `arr.size` | 返回数组元素总个数 |
+| `arr.shape` | 返回数组形状（行数, 列数） |
+| `arr.ndim` | 返回数组维度（一维/二维/...） |
+| `arr.dtype` | 返回数组元素数据类型 |
+
+---
+
+## 三、数组变形与索引切片
+### 1. 数组变形（reshape）
+- **核心规则**：变形前后元素总数必须相等
+* 二维变一维
+```python
+arr=np.random.randint(0,100,size=(5,6))  # 5*6=30个元素
+arr_1=arr.reshape(30)  # 一维数组（30个元素）
+# arr_1.reshape(6,5) 正确（6*5=30）
+# arr_1.reshape(6,6) 错误（6*6=36≠30）
+```
+* 一维变二维
+```python
+arr=np.random.randint(0,100,size=(5,6))  # 5*6=30个元素
+arr_1=arr.reshape(30)  # 一维数组（30个元素）
+arr_2=arr_1.reshape((5,6))
+```
+
+### 2. 索引与切片
+| 代码 | 说明 |
+|------|------|
+| `arr[i, j]` | 取第 i+1 行、第 j+1 列元素 |
+| `arr[i, :]` | 取第 i+1 行所有元素 |
+| `arr[:, j]` | 取第 j+1 列所有元素 |
+| `arr[::-1, :]` | 行反转（上下翻转） |
+| `arr[:, ::-1]` | 列反转（左右翻转） |
+
+---
+
+## 四、数组级联（拼接）
+### `np.concatenate()` 函数
+```python
+# 列级联（axis=0）：沿列方向拼接，行数增加
+np.concatenate((arr, arr), axis=0)
+
+# 行级联（axis=1）：沿行方向拼接，列数增加
+np.concatenate((arr, arr), axis=1)
+```
+- `axis=0`：上下拼接（行数叠加）
+- `axis=1`：左右拼接（列数叠加）
+
+---
+
+## 五、NumPy 统计计算
+| 函数 | 说明 |
+|------|------|
+| `arr.sum(axis=0)` | 沿列方向求和 |
+| `arr.max(axis=0)` | 沿列方向求最大值 |
+| `np.ptp(arr, axis=0)` | 沿列方向求极差（最大值-最小值） |
+| `np.mean(arr, axis=0)` | 沿列方向求平均值 |
+| `np.var(arr)` | 计算数组方差 |
+| `np.std(arr)` | 计算数组标准差（方差开根号） |
+| `np.sin(arr)` | 对数组每个元素求正弦值 |
+| `np.sort(arr)` | 对数组元素排序 |
+
+>[!NOTE]
+极差(ptp)：最大值 − 最小值` max - min`
+方差(var)：每个数减去平均值的平方，再求平均`mean((x - x.mean()) ** 2)`
+标准差(std)：方差开根号`sqrt(np.var(x))`
+>
+---
+
+## 六、Matplotlib 图片处理
+
+### 1. 图片读取与展示
+* 图片展示为42姐
+
+<img width='2560' height='1546' alt='Image' src='https://github.com/user-attachments/assets/3ec1a9fe-c1db-4580-8174-e2f8f130598f' />
+
+```python
+im_arr = plt.imread('./ENDFIELD_SHARE_1770208989.png')
+plt.imshow(im_arr)  # 展示图片
+plt.show()
+```
+>[!NOTE]
+### 2. 图片数组操作
+| 代码 | 说明 |
+|------|------|
+| `im_arr.shape` | 查看图片形状（高, 宽, 颜色通道） |
+| `im_arr + 0.5` | 逐元素加法（调整亮度） |
+| `plt.imshow(im_arr[:, ::-1])` | 图片左右翻转 |
+| `plt.imshow(im_arr[::-1, :])` | 图片上下翻转 |
+| `plt.imshow(im_arr[0:1400, 700:1800])` | 裁剪图片区域 |
+| `np.concatenate((im_arr, im_arr), axis=1)` | 图片左右拼接 |
+| `np.concatenate((im_arr, im_arr), axis=0)` | 图片上下拼接 |
+
+---
+
+## 七、OS 模块文件操作
+| 代码 | 说明 |
+|------|------|
+| `os.getcwd()` | 获取当前代码所在文件夹路径 |
+| `os.listdir('.')` | 列出当前目录下所有文件/文件夹 |
+>[!NOTE]
+. ：当前目录
+.. ：上一级目录
+>
+---
+
+## 八、常见报错与注意事项
+1. **reshape 报错**：`ValueError: cannot reshape array of size 30 into shape (6,6)`
+   - 原因：变形前后元素总数不匹配（30 ≠ 36）
+   - 解决：确保 `行数 × 列数 = 元素总个数`
+2. **NumPy 是第三方库**：需先 `pip install numpy` 才能导入使用
+3. **数组运算**：支持逐元素运算（如 `im_arr + 0.5`），无需循环遍历
+
+---
+
+## 九、完整代码示例
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+# 1. 创建数组
+arr = np.random.randint(0, 100, size=(5, 6))
+print('数组形状：', arr.shape)
+
+# 2. 数组变形
+arr_1 = arr.reshape(30)
+print('变形后一维数组：', arr_1)
+
+# 3. 统计计算
+print('列和：', arr.sum(axis=0))
+print('列最大值：', arr.max(axis=0))
+print('极差：', np.ptp(arr, axis=0))
+print('平均值：', np.mean(arr))
+print('方差：', np.var(arr))
+print('标准差：', np.std(arr))
+
+# 4. 图片处理
+im_arr = plt.imread('./ENDFIELD_SHARE_1770208989.png')
+plt.imshow(im_arr)
+plt.show()
+
+# 5. 文件操作
+print('当前路径：', os.getcwd())
+print('当前目录文件：', os.listdir('.'))
+```
+# 图例
+
+<img width='2053' height='6312' alt='Image' src='https://github.com/user-attachments/assets/9b3095c1-f2de-4411-bc07-0db9d0e428ae' />
+
+<img width='2053' height='6312' alt='Image' src='https://github.com/user-attachments/assets/0c2766e4-6d34-48a0-b413-84533fccd76b' />
+。">
+<meta property="og:title" content="python第三方库numpy,matplotlib,os基础">
+<meta property="og:description" content="# NumPy + Matplotlib + OS 核心操作总结
+
+## 一、基础导入库
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+```
+>[!NOTE]
+以上库若在pycharm中运用需提前安装配置好环境
+可在anaconda的jupyter中进行编写
+>
+
+---
+
+## 二、NumPy 数组创建与基础属性
+### 1. 数组创建
+
+| 代码 | 说明 |
+|------|------|
+| `np.array([1])` | 创建一维数组 |
+| `np.array([[1,2],[2,33]])` | 创建二维数组 |
+| `np.ones(shape=(3,4))` | 生成 3行4列全1数组 |
+| `np.eye(6)` | 生成 6×6 单位矩阵（对角线为1，其余为0） |
+| `np.linspace(0,100,num=20)` | 生成 0~100 等差数列，共20个数据 |
+| `np.arange(10,50,step=2)` | 生成 10~50 等差数列，步长为2 |
+| `np.random.randint(0,100,size=(5,6))` | 生成 5行6列随机整数数组（范围0~100） |
+
+### 2. NumPy中array创建数组操作优先级
+
+| 代码 | 说明 |
+|------|------|
+| `np.array([12,1.1,'2'])` | 混合类型自动转为字符串数组 |
+| `np.array([1.2,2])` | 混合数值自动向上转换为浮点数 |
+| `np.array(['1.2',2])` | 字符串+数字 转为 字符串数组 |
+
+* 由此可知
+  - 数组：数组存储数据的类型必须是统一类型
+    - 优先级：字符串>浮点数>整数
+
+### 3. 数组属性查询
+
+| 代码 | 说明 |
+|------|------|
+| `arr.size` | 返回数组元素总个数 |
+| `arr.shape` | 返回数组形状（行数, 列数） |
+| `arr.ndim` | 返回数组维度（一维/二维/...） |
+| `arr.dtype` | 返回数组元素数据类型 |
+
+---
+
+## 三、数组变形与索引切片
+### 1. 数组变形（reshape）
+- **核心规则**：变形前后元素总数必须相等
+* 二维变一维
+```python
+arr=np.random.randint(0,100,size=(5,6))  # 5*6=30个元素
+arr_1=arr.reshape(30)  # 一维数组（30个元素）
+# arr_1.reshape(6,5) 正确（6*5=30）
+# arr_1.reshape(6,6) 错误（6*6=36≠30）
+```
+* 一维变二维
+```python
+arr=np.random.randint(0,100,size=(5,6))  # 5*6=30个元素
+arr_1=arr.reshape(30)  # 一维数组（30个元素）
+arr_2=arr_1.reshape((5,6))
+```
+
+### 2. 索引与切片
+| 代码 | 说明 |
+|------|------|
+| `arr[i, j]` | 取第 i+1 行、第 j+1 列元素 |
+| `arr[i, :]` | 取第 i+1 行所有元素 |
+| `arr[:, j]` | 取第 j+1 列所有元素 |
+| `arr[::-1, :]` | 行反转（上下翻转） |
+| `arr[:, ::-1]` | 列反转（左右翻转） |
+
+---
+
+## 四、数组级联（拼接）
+### `np.concatenate()` 函数
+```python
+# 列级联（axis=0）：沿列方向拼接，行数增加
+np.concatenate((arr, arr), axis=0)
+
+# 行级联（axis=1）：沿行方向拼接，列数增加
+np.concatenate((arr, arr), axis=1)
+```
+- `axis=0`：上下拼接（行数叠加）
+- `axis=1`：左右拼接（列数叠加）
+
+---
+
+## 五、NumPy 统计计算
+| 函数 | 说明 |
+|------|------|
+| `arr.sum(axis=0)` | 沿列方向求和 |
+| `arr.max(axis=0)` | 沿列方向求最大值 |
+| `np.ptp(arr, axis=0)` | 沿列方向求极差（最大值-最小值） |
+| `np.mean(arr, axis=0)` | 沿列方向求平均值 |
+| `np.var(arr)` | 计算数组方差 |
+| `np.std(arr)` | 计算数组标准差（方差开根号） |
+| `np.sin(arr)` | 对数组每个元素求正弦值 |
+| `np.sort(arr)` | 对数组元素排序 |
+
+>[!NOTE]
+极差(ptp)：最大值 − 最小值` max - min`
+方差(var)：每个数减去平均值的平方，再求平均`mean((x - x.mean()) ** 2)`
+标准差(std)：方差开根号`sqrt(np.var(x))`
+>
+---
+
+## 六、Matplotlib 图片处理
+
+### 1. 图片读取与展示
+* 图片展示为42姐
+
+<img width='2560' height='1546' alt='Image' src='https://github.com/user-attachments/assets/3ec1a9fe-c1db-4580-8174-e2f8f130598f' />
+
+```python
+im_arr = plt.imread('./ENDFIELD_SHARE_1770208989.png')
+plt.imshow(im_arr)  # 展示图片
+plt.show()
+```
+>[!NOTE]
+### 2. 图片数组操作
+| 代码 | 说明 |
+|------|------|
+| `im_arr.shape` | 查看图片形状（高, 宽, 颜色通道） |
+| `im_arr + 0.5` | 逐元素加法（调整亮度） |
+| `plt.imshow(im_arr[:, ::-1])` | 图片左右翻转 |
+| `plt.imshow(im_arr[::-1, :])` | 图片上下翻转 |
+| `plt.imshow(im_arr[0:1400, 700:1800])` | 裁剪图片区域 |
+| `np.concatenate((im_arr, im_arr), axis=1)` | 图片左右拼接 |
+| `np.concatenate((im_arr, im_arr), axis=0)` | 图片上下拼接 |
+
+---
+
+## 七、OS 模块文件操作
+| 代码 | 说明 |
+|------|------|
+| `os.getcwd()` | 获取当前代码所在文件夹路径 |
+| `os.listdir('.')` | 列出当前目录下所有文件/文件夹 |
+>[!NOTE]
+. ：当前目录
+.. ：上一级目录
+>
+---
+
+## 八、常见报错与注意事项
+1. **reshape 报错**：`ValueError: cannot reshape array of size 30 into shape (6,6)`
+   - 原因：变形前后元素总数不匹配（30 ≠ 36）
+   - 解决：确保 `行数 × 列数 = 元素总个数`
+2. **NumPy 是第三方库**：需先 `pip install numpy` 才能导入使用
+3. **数组运算**：支持逐元素运算（如 `im_arr + 0.5`），无需循环遍历
+
+---
+
+## 九、完整代码示例
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+# 1. 创建数组
+arr = np.random.randint(0, 100, size=(5, 6))
+print('数组形状：', arr.shape)
+
+# 2. 数组变形
+arr_1 = arr.reshape(30)
+print('变形后一维数组：', arr_1)
+
+# 3. 统计计算
+print('列和：', arr.sum(axis=0))
+print('列最大值：', arr.max(axis=0))
+print('极差：', np.ptp(arr, axis=0))
+print('平均值：', np.mean(arr))
+print('方差：', np.var(arr))
+print('标准差：', np.std(arr))
+
+# 4. 图片处理
+im_arr = plt.imread('./ENDFIELD_SHARE_1770208989.png')
+plt.imshow(im_arr)
+plt.show()
+
+# 5. 文件操作
+print('当前路径：', os.getcwd())
+print('当前目录文件：', os.listdir('.'))
+```
+# 图例
+
+<img width='2053' height='6312' alt='Image' src='https://github.com/user-attachments/assets/9b3095c1-f2de-4411-bc07-0db9d0e428ae' />
+
+<img width='2053' height='6312' alt='Image' src='https://github.com/user-attachments/assets/0c2766e4-6d34-48a0-b413-84533fccd76b' />
+。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.yuyuyu0721.top /post/python-di-san-fang-ku-numpy%2Cmatplotlib%2Cos-ji-chu.html">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Meekdai/meekdai.github.io/logo64.jpg ">
+<title>python第三方库numpy,matplotlib,os基础</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+<style>.markdown-alert{padding:0.5rem 1rem;margin-bottom:1rem;border-left:.25em solid var(--borderColor-default,var(--color-border-default));}.markdown-alert .markdown-alert-title {display:flex;font-weight:var(--base-text-weight-medium,500);align-items:center;line-height:1;}.markdown-alert>:first-child {margin-top:0;}.markdown-alert>:last-child {margin-bottom:0;}</style><style>.markdown-alert.markdown-alert-note {border-left-color:var(--borderColor-accent-emphasis, var(--color-accent-emphasis));background-color:var(--color-accent-subtle);}.markdown-alert.markdown-alert-note .markdown-alert-title {color: var(--fgColor-accent,var(--color-accent-fg));}</style>
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">python第三方库numpy,matplotlib,os基础</h1>
+<div class="title-right">
+    <a href="https://blog.yuyuyu0721.top " id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/yuyuyu0721/yuyuyu0721.github.io/issues/17" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>NumPy + Matplotlib + OS 核心操作总结</h1>
+<h2>一、基础导入库</h2>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">numpy</span> <span class="pl-k">as</span> <span class="pl-s1">np</span>
+<span class="pl-k">import</span> <span class="pl-s1">matplotlib</span>.<span class="pl-s1">pyplot</span> <span class="pl-k">as</span> <span class="pl-s1">plt</span>
+<span class="pl-k">import</span> <span class="pl-s1">os</span></pre></div>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>以上库若在pycharm中运用需提前安装配置好环境<br>
+可在anaconda的jupyter中进行编写</p>
+</div>
+<hr>
+<h2>二、NumPy 数组创建与基础属性</h2>
+<h3>1. 数组创建</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">np.array([1])</code></td>
+<td>创建一维数组</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.array([[1,2],[2,33]])</code></td>
+<td>创建二维数组</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.ones(shape=(3,4))</code></td>
+<td>生成 3行4列全1数组</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.eye(6)</code></td>
+<td>生成 6×6 单位矩阵（对角线为1，其余为0）</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.linspace(0,100,num=20)</code></td>
+<td>生成 0~100 等差数列，共20个数据</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.arange(10,50,step=2)</code></td>
+<td>生成 10~50 等差数列，步长为2</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.random.randint(0,100,size=(5,6))</code></td>
+<td>生成 5行6列随机整数数组（范围0~100）</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h3>2. NumPy中array创建数组操作优先级</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">np.array([12,1.1,'2'])</code></td>
+<td>混合类型自动转为字符串数组</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.array([1.2,2])</code></td>
+<td>混合数值自动向上转换为浮点数</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.array(['1.2',2])</code></td>
+<td>字符串+数字 转为 字符串数组</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<ul>
+<li>由此可知
+<ul>
+<li>数组：数组存储数据的类型必须是统一类型
+<ul>
+<li>优先级：字符串&gt;浮点数&gt;整数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>3. 数组属性查询</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">arr.size</code></td>
+<td>返回数组元素总个数</td>
+</tr>
+<tr>
+<td><code class="notranslate">arr.shape</code></td>
+<td>返回数组形状（行数, 列数）</td>
+</tr>
+<tr>
+<td><code class="notranslate">arr.ndim</code></td>
+<td>返回数组维度（一维/二维/...）</td>
+</tr>
+<tr>
+<td><code class="notranslate">arr.dtype</code></td>
+<td>返回数组元素数据类型</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h2>三、数组变形与索引切片</h2>
+<h3>1. 数组变形（reshape）</h3>
+<ul>
+<li><strong>核心规则</strong>：变形前后元素总数必须相等</li>
+</ul>
+<ul>
+<li>二维变一维</li>
+</ul>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">arr</span><span class="pl-c1">=</span><span class="pl-s1">np</span>.<span class="pl-c1">random</span>.<span class="pl-c1">randint</span>(<span class="pl-c1">0</span>,<span class="pl-c1">100</span>,<span class="pl-s1">size</span><span class="pl-c1">=</span>(<span class="pl-c1">5</span>,<span class="pl-c1">6</span>))  <span class="pl-c"># 5*6=30个元素</span>
+<span class="pl-s1">arr_1</span><span class="pl-c1">=</span><span class="pl-s1">arr</span>.<span class="pl-c1">reshape</span>(<span class="pl-c1">30</span>)  <span class="pl-c"># 一维数组（30个元素）</span>
+<span class="pl-c"># arr_1.reshape(6,5) 正确（6*5=30）</span>
+<span class="pl-c"># arr_1.reshape(6,6) 错误（6*6=36≠30）</span></pre></div>
+<ul>
+<li>一维变二维</li>
+</ul>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">arr</span><span class="pl-c1">=</span><span class="pl-s1">np</span>.<span class="pl-c1">random</span>.<span class="pl-c1">randint</span>(<span class="pl-c1">0</span>,<span class="pl-c1">100</span>,<span class="pl-s1">size</span><span class="pl-c1">=</span>(<span class="pl-c1">5</span>,<span class="pl-c1">6</span>))  <span class="pl-c"># 5*6=30个元素</span>
+<span class="pl-s1">arr_1</span><span class="pl-c1">=</span><span class="pl-s1">arr</span>.<span class="pl-c1">reshape</span>(<span class="pl-c1">30</span>)  <span class="pl-c"># 一维数组（30个元素）</span>
+<span class="pl-s1">arr_2</span><span class="pl-c1">=</span><span class="pl-s1">arr_1</span>.<span class="pl-c1">reshape</span>((<span class="pl-c1">5</span>,<span class="pl-c1">6</span>))</pre></div>
+<h3>2. 索引与切片</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">arr[i, j]</code></td>
+<td>取第 i+1 行、第 j+1 列元素</td>
+</tr>
+<tr>
+<td><code class="notranslate">arr[i, :]</code></td>
+<td>取第 i+1 行所有元素</td>
+</tr>
+<tr>
+<td><code class="notranslate">arr[:, j]</code></td>
+<td>取第 j+1 列所有元素</td>
+</tr>
+<tr>
+<td><code class="notranslate">arr[::-1, :]</code></td>
+<td>行反转（上下翻转）</td>
+</tr>
+<tr>
+<td><code class="notranslate">arr[:, ::-1]</code></td>
+<td>列反转（左右翻转）</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h2>四、数组级联（拼接）</h2>
+<h3><code class="notranslate">np.concatenate()</code> 函数</h3>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># 列级联（axis=0）：沿列方向拼接，行数增加</span>
+<span class="pl-s1">np</span>.<span class="pl-c1">concatenate</span>((<span class="pl-s1">arr</span>, <span class="pl-s1">arr</span>), <span class="pl-s1">axis</span><span class="pl-c1">=</span><span class="pl-c1">0</span>)
+
+<span class="pl-c"># 行级联（axis=1）：沿行方向拼接，列数增加</span>
+<span class="pl-s1">np</span>.<span class="pl-c1">concatenate</span>((<span class="pl-s1">arr</span>, <span class="pl-s1">arr</span>), <span class="pl-s1">axis</span><span class="pl-c1">=</span><span class="pl-c1">1</span>)</pre></div>
+<ul>
+<li><code class="notranslate">axis=0</code>：上下拼接（行数叠加）</li>
+<li><code class="notranslate">axis=1</code>：左右拼接（列数叠加）</li>
+</ul>
+<hr>
+<h2>五、NumPy 统计计算</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">arr.sum(axis=0)</code></td>
+<td>沿列方向求和</td>
+</tr>
+<tr>
+<td><code class="notranslate">arr.max(axis=0)</code></td>
+<td>沿列方向求最大值</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.ptp(arr, axis=0)</code></td>
+<td>沿列方向求极差（最大值-最小值）</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.mean(arr, axis=0)</code></td>
+<td>沿列方向求平均值</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.var(arr)</code></td>
+<td>计算数组方差</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.std(arr)</code></td>
+<td>计算数组标准差（方差开根号）</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.sin(arr)</code></td>
+<td>对数组每个元素求正弦值</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.sort(arr)</code></td>
+<td>对数组元素排序</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>极差(ptp)：最大值 − 最小值<code class="notranslate"> max - min</code><br>
+方差(var)：每个数减去平均值的平方，再求平均<code class="notranslate">mean((x - x.mean()) ** 2)</code><br>
+标准差(std)：方差开根号<code class="notranslate">sqrt(np.var(x))</code></p>
+</div>
+<hr>
+<h2>六、Matplotlib 图片处理</h2>
+<h3>1. 图片读取与展示</h3>
+<ul>
+<li>图片展示为42姐</li>
+</ul>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/3ec1a9fe-c1db-4580-8174-e2f8f130598f"><img width="2000" height="1546" alt="Image" src="https://github.com/user-attachments/assets/3ec1a9fe-c1db-4580-8174-e2f8f130598f" style="max-width: 100%; height: auto; max-height: 1546px;"></a></p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">im_arr</span> <span class="pl-c1">=</span> <span class="pl-s1">plt</span>.<span class="pl-c1">imread</span>(<span class="pl-s">'./ENDFIELD_SHARE_1770208989.png'</span>)
+<span class="pl-s1">plt</span>.<span class="pl-c1">imshow</span>(<span class="pl-s1">im_arr</span>)  <span class="pl-c"># 展示图片</span>
+<span class="pl-s1">plt</span>.<span class="pl-c1">show</span>()</pre></div>
+<blockquote>
+<p>[!NOTE]</p>
+</blockquote>
+<h3>2. 图片数组操作</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">im_arr.shape</code></td>
+<td>查看图片形状（高, 宽, 颜色通道）</td>
+</tr>
+<tr>
+<td><code class="notranslate">im_arr + 0.5</code></td>
+<td>逐元素加法（调整亮度）</td>
+</tr>
+<tr>
+<td><code class="notranslate">plt.imshow(im_arr[:, ::-1])</code></td>
+<td>图片左右翻转</td>
+</tr>
+<tr>
+<td><code class="notranslate">plt.imshow(im_arr[::-1, :])</code></td>
+<td>图片上下翻转</td>
+</tr>
+<tr>
+<td><code class="notranslate">plt.imshow(im_arr[0:1400, 700:1800])</code></td>
+<td>裁剪图片区域</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.concatenate((im_arr, im_arr), axis=1)</code></td>
+<td>图片左右拼接</td>
+</tr>
+<tr>
+<td><code class="notranslate">np.concatenate((im_arr, im_arr), axis=0)</code></td>
+<td>图片上下拼接</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h2>七、OS 模块文件操作</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">os.getcwd()</code></td>
+<td>获取当前代码所在文件夹路径</td>
+</tr>
+<tr>
+<td><code class="notranslate">os.listdir('.')</code></td>
+<td>列出当前目录下所有文件/文件夹</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>. ：当前目录<br>
+.. ：上一级目录</p>
+</div>
+<hr>
+<h2>八、常见报错与注意事项</h2>
+<ol>
+<li><strong>reshape 报错</strong>：<code class="notranslate">ValueError: cannot reshape array of size 30 into shape (6,6)</code>
+<ul>
+<li>原因：变形前后元素总数不匹配（30 ≠ 36）</li>
+<li>解决：确保 <code class="notranslate">行数 × 列数 = 元素总个数</code></li>
+</ul>
+</li>
+<li><strong>NumPy 是第三方库</strong>：需先 <code class="notranslate">pip install numpy</code> 才能导入使用</li>
+<li><strong>数组运算</strong>：支持逐元素运算（如 <code class="notranslate">im_arr + 0.5</code>），无需循环遍历</li>
+</ol>
+<hr>
+<h2>九、完整代码示例</h2>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">numpy</span> <span class="pl-k">as</span> <span class="pl-s1">np</span>
+<span class="pl-k">import</span> <span class="pl-s1">matplotlib</span>.<span class="pl-s1">pyplot</span> <span class="pl-k">as</span> <span class="pl-s1">plt</span>
+<span class="pl-k">import</span> <span class="pl-s1">os</span>
+
+<span class="pl-c"># 1. 创建数组</span>
+<span class="pl-s1">arr</span> <span class="pl-c1">=</span> <span class="pl-s1">np</span>.<span class="pl-c1">random</span>.<span class="pl-c1">randint</span>(<span class="pl-c1">0</span>, <span class="pl-c1">100</span>, <span class="pl-s1">size</span><span class="pl-c1">=</span>(<span class="pl-c1">5</span>, <span class="pl-c1">6</span>))
+<span class="pl-en">print</span>(<span class="pl-s">"数组形状："</span>, <span class="pl-s1">arr</span>.<span class="pl-c1">shape</span>)
+
+<span class="pl-c"># 2. 数组变形</span>
+<span class="pl-s1">arr_1</span> <span class="pl-c1">=</span> <span class="pl-s1">arr</span>.<span class="pl-c1">reshape</span>(<span class="pl-c1">30</span>)
+<span class="pl-en">print</span>(<span class="pl-s">"变形后一维数组："</span>, <span class="pl-s1">arr_1</span>)
+
+<span class="pl-c"># 3. 统计计算</span>
+<span class="pl-en">print</span>(<span class="pl-s">"列和："</span>, <span class="pl-s1">arr</span>.<span class="pl-c1">sum</span>(<span class="pl-s1">axis</span><span class="pl-c1">=</span><span class="pl-c1">0</span>))
+<span class="pl-en">print</span>(<span class="pl-s">"列最大值："</span>, <span class="pl-s1">arr</span>.<span class="pl-c1">max</span>(<span class="pl-s1">axis</span><span class="pl-c1">=</span><span class="pl-c1">0</span>))
+<span class="pl-en">print</span>(<span class="pl-s">"极差："</span>, <span class="pl-s1">np</span>.<span class="pl-c1">ptp</span>(<span class="pl-s1">arr</span>, <span class="pl-s1">axis</span><span class="pl-c1">=</span><span class="pl-c1">0</span>))
+<span class="pl-en">print</span>(<span class="pl-s">"平均值："</span>, <span class="pl-s1">np</span>.<span class="pl-c1">mean</span>(<span class="pl-s1">arr</span>))
+<span class="pl-en">print</span>(<span class="pl-s">"方差："</span>, <span class="pl-s1">np</span>.<span class="pl-c1">var</span>(<span class="pl-s1">arr</span>))
+<span class="pl-en">print</span>(<span class="pl-s">"标准差："</span>, <span class="pl-s1">np</span>.<span class="pl-c1">std</span>(<span class="pl-s1">arr</span>))
+
+<span class="pl-c"># 4. 图片处理</span>
+<span class="pl-s1">im_arr</span> <span class="pl-c1">=</span> <span class="pl-s1">plt</span>.<span class="pl-c1">imread</span>(<span class="pl-s">'./ENDFIELD_SHARE_1770208989.png'</span>)
+<span class="pl-s1">plt</span>.<span class="pl-c1">imshow</span>(<span class="pl-s1">im_arr</span>)
+<span class="pl-s1">plt</span>.<span class="pl-c1">show</span>()
+
+<span class="pl-c"># 5. 文件操作</span>
+<span class="pl-en">print</span>(<span class="pl-s">"当前路径："</span>, <span class="pl-s1">os</span>.<span class="pl-c1">getcwd</span>())
+<span class="pl-en">print</span>(<span class="pl-s">"当前目录文件："</span>, <span class="pl-s1">os</span>.<span class="pl-c1">listdir</span>(<span class="pl-s">'.'</span>))</pre></div>
+<h1>图例</h1>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/9b3095c1-f2de-4411-bc07-0db9d0e428ae"><img width="2000" height="2000" alt="Image" src="https://github.com/user-attachments/assets/9b3095c1-f2de-4411-bc07-0db9d0e428ae" style="max-width: 100%; height: auto; max-height: 2000px;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/0c2766e4-6d34-48a0-b413-84533fccd76b"><img width="2000" height="2000" alt="Image" src="https://github.com/user-attachments/assets/0c2766e4-6d34-48a0-b413-84533fccd76b" style="max-width: 100%; height: auto; max-height: 2000px;"></a></p></div>
+<div style="font-size:small;margin-top:8px;float:right;">转载请注明出处</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://blog.yuyuyu0721.top ">玉与遇</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("11/25/2025"!=""){
+    var startSite=new Date("11/25/2025");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","yuyuyu0721/yuyuyu0721.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+<script src='https://blog.154451.xyz/assets/cat_backtotop.js '></script><script src='https://blog.154451.xyz/assets/lazyload.js '></script><script src='https://blog.154451.xyz/assets/viewimg.js '></script><script src='https://blog.154451.xyz/assets/subtitle_id.js '></script><script src='https://utteranc.es/client.js' repo='yuyuyu0721/yuyuyu0721.github.io' issue-term='pathname' label='评论' theme='github-light' crossorigin='anonymous' async></script>
+
+</html>
