@@ -147,7 +147,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <span class="pl-c"># 更新烟蒂数量:兑换后剩余的烟蒂 + 新烟吸完产生的烟蒂</span>
     <span class="pl-s1">butts</span> <span class="pl-c1">=</span> (<span class="pl-s1">butts</span> <span class="pl-c1">%</span> <span class="pl-s1">k</span>) <span class="pl-c1">+</span> <span class="pl-s1">new_cigarettes</span>
 <span class="pl-en">print</span>(<span class="pl-s1">total</span>)</pre></div>
-<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>本题重在理解新烟和新烟蒂的变化(要能想到将n初始的输出值改为两个变量)即以下所展示的代码<br>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg data-component="Octicon" class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>本题重在理解新烟和新烟蒂的变化(要能想到将n初始的输出值改为两个变量)即以下所展示的代码<br>
 <code class="notranslate">new_cigarettes = butts // k</code>和 <code class="notranslate">butts = (butts % k) + new_cigarettes</code></p>
 </div>
 <h1>举个例子</h1>
